@@ -229,21 +229,27 @@ input[type=range]{width:100%;accent-color:var(--teal-dim);height:4px;margin:4px 
 .summary-meta{font-size:12px;color:var(--ink-soft);}
 
 .exchange-card{
-  background:linear-gradient(135deg,#fffdf7 0%,#f3ead3 100%);
+  background:#fff;
   color:var(--ink);
-  border:1px solid rgba(184,127,19,.28);
-  border-radius:8px;
-  padding:18px 20px;
+  border:1px solid var(--paper-dim);
+  border-radius:10px;
+  padding:20px;
   margin-bottom:16px;
-  box-shadow:0 10px 24px rgba(17,23,42,.12);
+  box-shadow:0 10px 22px rgba(17,23,42,.10);
 }
 .exchange-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
-.exchange-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-dim);margin:0 0 4px;}
-.exchange-title{font-size:17px;font-weight:700;margin:0;color:var(--ink);}
+.exchange-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-dim);margin:0 0 6px;}
+.exchange-title{font-size:16px;font-weight:700;margin:0;color:var(--ink);}
+.exchange-main-rate{font-size:30px;line-height:1.15;font-weight:700;color:var(--ink);margin:8px 0 4px;letter-spacing:-.03em;}
+.exchange-main-rate .unit{font-size:14px;font-weight:600;color:var(--ink-soft);letter-spacing:0;}
 .exchange-rate-line{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:6px 0 0;}
 .exchange-updated{font-size:11px;color:var(--ink-soft);white-space:nowrap;}
-.exchange-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;}
-.exchange-box{background:#fff;border:1px solid var(--paper-dim);border-radius:6px;padding:12px;}
+.exchange-converter{display:grid;grid-template-columns:1fr;gap:9px;margin-top:16px;}
+.exchange-row{display:grid;grid-template-columns:1fr 190px;align-items:center;border:1px solid var(--paper-dim);border-radius:7px;background:#fff;overflow:hidden;}
+.exchange-row input{border:none;border-radius:0;padding:14px 16px;font-size:16px;width:100%;}
+.exchange-row select{height:100%;border:none;border-left:1px solid var(--paper-dim);border-radius:0;background:#fff;padding:0 14px;font-size:13px;color:var(--ink);}
+.exchange-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;}
+.exchange-box{background:#fffaf0;border:1px solid rgba(184,127,19,.22);border-radius:7px;padding:12px;}
 .exchange-box label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--ink);}
 .exchange-box input{width:100%;}
 .exchange-out{font-family:'Space Mono',monospace;font-size:13px;color:var(--teal-dim);margin:8px 0 0;word-break:break-word;}
@@ -329,7 +335,9 @@ input[type=range]{width:100%;accent-color:var(--teal-dim);height:4px;margin:4px 
   .steps{font-size:10px;}
   .panel{padding:20px;}
   .summary-bar{align-items:flex-start;}
-  .exchange-grid,.analysis-grid,.match-bars{grid-template-columns:1fr;}
+  .exchange-tools,.analysis-grid,.match-bars{grid-template-columns:1fr;}
+  .exchange-row{grid-template-columns:1fr;}
+  .exchange-row select{border-left:none;border-top:1px solid var(--paper-dim);height:44px;}
   .rec-section-title{align-items:flex-start;flex-direction:column;}
   .rec-section-title p{text-align:left;}
   .profile-grid{grid-template-columns:1fr;}
@@ -487,6 +495,48 @@ input[type=range]{width:100%;accent-color:var(--teal-dim);height:4px;margin:4px 
       </div>
 
       <div class="style-section">
+        <h3>항공 / 도착 시간</h3>
+        <label class="field-label">항공편 선호</label>
+        <div class="chip-grid" id="flightType"></div>
+        <label class="field-label" style="margin-top:14px;">비행시간 허용 범위</label>
+        <div class="chip-grid" id="flightTime"></div>
+        <label class="field-label" style="margin-top:14px;">도착 시간 선호</label>
+        <div class="chip-grid" id="arrivalTime"></div>
+      </div>
+
+      <div class="style-section">
+        <h3>숙소 위치 / 치안</h3>
+        <label class="field-label">숙소 위치 선호 (최대 2개)</label>
+        <div class="chip-grid" id="stayLocation" data-max="2"></div>
+        <label class="field-label" style="margin-top:14px;">밤 이동 민감도</label>
+        <div class="chip-grid" id="nightSafety"></div>
+      </div>
+
+      <div class="style-section">
+        <h3>음식 / 위생</h3>
+        <label class="field-label">음식·위생 민감도</label>
+        <div class="chip-grid" id="foodHygiene"></div>
+      </div>
+
+      <div class="style-section">
+        <h3>쇼핑 / 콘텐츠</h3>
+        <label class="field-label">쇼핑 관심사 (다중 선택)</label>
+        <div class="chip-grid" id="shoppingFocus"></div>
+        <label class="field-label" style="margin-top:14px;">사진·콘텐츠 취향 (다중 선택)</label>
+        <div class="chip-grid" id="contentFocus"></div>
+      </div>
+
+      <div class="style-section">
+        <h3>이동 피로도</h3>
+        <label class="field-label">하루 이동량 허용</label>
+        <div class="chip-grid" id="mobility"></div>
+        <label class="field-label" style="margin-top:14px;">장거리 근교 투어</label>
+        <div class="chip-grid" id="longTour"></div>
+        <label class="field-label" style="margin-top:14px;">여행 중 숙소 이동</label>
+        <div class="chip-grid" id="accommodationMove"></div>
+      </div>
+
+      <div class="style-section">
         <h3>사진 / 기록</h3>
         <label class="field-label">사진 스팟 중요도</label>
         <div class="chip-grid" id="photoImportance"></div>
@@ -629,6 +679,17 @@ const RESERVATION_OPTIONS = [['예약위주','예약 가능한 곳 위주'],['�
 const BUDGET_PRIORITY_OPTIONS = [['숙소예산','숙소'],['음식예산','음식'],['쇼핑예산','쇼핑'],['액티비티예산','액티비티·투어']];
 const TRANSPORT_OPTIONS = [['대중교통','대중교통 위주'],['많이걷기','걷기 많이 OK'],['택시','택시·차량 위주']];
 const PHOTO_OPTIONS = [['필수','인생샷 스팟 필수'],['적당히_사진','적당히 남기면 됨'],['신경안씀','크게 신경 안 씀']];
+const FLIGHT_TYPE_OPTIONS = [['직항선호','직항 선호'],['경유가능','경유 가능'],['저렴하면상관없음','저렴하면 상관없음']];
+const FLIGHT_TIME_OPTIONS = [['짧게','4시간 이하 선호'],['중거리','6시간 내외까지 가능'],['장거리','장거리도 가능']];
+const ARRIVAL_TIME_OPTIONS = [['낮도착','낮 도착 선호'],['밤도착가능','밤 도착도 가능'],['새벽도착가능','새벽 도착도 가능']];
+const STAY_LOCATION_OPTIONS = [['교통역근처','역/교통 가까운 곳'],['도심','도심 중심'],['해변리조트','해변·리조트'],['야시장근처','야시장·번화가 근처'],['조용한동네','조용한 동네'],['밤이동최소','밤 이동 최소화']];
+const NIGHT_SAFETY_OPTIONS = [['매우중요','밤 이동 최소화 필수'],['보통','택시/대중교통이면 OK'],['자유로움','밤 일정도 자유롭게']];
+const FOOD_HYGIENE_OPTIONS = [['예민','위생·물갈이 예민'],['보통','보통'],['도전가능','로컬 음식 도전 가능']];
+const SHOPPING_FOCUS_OPTIONS = [['현지브랜드','현지 브랜드'],['기념품','기념품'],['명품아울렛','명품·아울렛'],['마트쇼핑','마트 쇼핑'],['쇼핑적음','쇼핑 적음']];
+const CONTENT_FOCUS_OPTIONS = [['감성카페','감성 카페'],['자연풍경','자연 풍경'],['도시야경','도시 야경'],['바다수영장','바다·수영장'],['전통거리','전통 거리'],['전시공간','전시·공간']];
+const MOBILITY_OPTIONS = [['적게걷기','적게 걷기'],['보통이동','보통 이동'],['많이걷기이동','많이 걷기 가능']];
+const LONG_TOUR_OPTIONS = [['싫음','장거리 투어 싫음'],['하루정도','하루 정도 가능'],['여러번가능','여러 번 가능']];
+const ACCOMMODATION_MOVE_OPTIONS = [['한숙소','한 숙소 고정'],['한번가능','1회 이동 가능'],['여러번가능','여러 번 이동 가능']];
 
 const DESTINATIONS = [
   {
@@ -787,7 +848,10 @@ function defaultStyles(){
   return {
     stayType:[], stayPriority:[], activities:[], tourStyle:null,
     dislikes:{}, spicy:null, waitTime:null, restaurantType:null, reservation:null,
-    budget:50, budgetPriority:[], pace:50, transport:null, photoImportance:null
+    budget:50, budgetPriority:[], pace:50, transport:null, photoImportance:null,
+    flightType:null, flightTime:null, arrivalTime:null,
+    stayLocation:[], nightSafety:null, foodHygiene:null,
+    shoppingFocus:[], contentFocus:[], mobility:null, longTour:null, accommodationMove:null
   };
 }
 
@@ -808,7 +872,7 @@ function randomCode(){
   return c;
 }
 function defaultMeta(){
-  return { groupSize:2, startDate:null, endDate:null, countryCode:'KR', countryName:'한국', currency:'KRW', budgetKRW:null };
+  return { groupSize:2, startDate:null, endDate:null, countryCode:'KR', countryName:'한국', currency:'KRW', budgetKRW:null, exchangeBase:'KRW', exchangeTarget:'USD', exchangeBaseAmount:1 };
 }
 function defaultState(){
   return {
@@ -1009,6 +1073,8 @@ function setupCountrySelect(){
       state.meta.countryCode = picked.code;
       state.meta.countryName = picked.name;
       state.meta.currency = picked.currency;
+      state.meta.exchangeBase = 'KRW';
+      state.meta.exchangeTarget = picked.currency === 'KRW' ? 'USD' : picked.currency;
       saveTrip();
     }
     updateCountryHelp();
@@ -1093,7 +1159,7 @@ function saveLastProfile(id){ if(currentCode) localStorage.setItem(lastProfileKe
 function getLastProfileId(){ return currentCode ? localStorage.getItem(lastProfileKey()) : null; }
 function hasAnyStyleSelection(styles){
   if(!styles) return false;
-  return (styles.activities || []).length || (styles.stayType || []).length || styles.tourStyle || styles.spicy || styles.transport || styles.photoImportance;
+  return (styles.activities || []).length || (styles.stayType || []).length || styles.tourStyle || styles.spicy || styles.transport || styles.photoImportance || styles.flightType || styles.flightTime || styles.arrivalTime || (styles.stayLocation || []).length || styles.nightSafety || styles.foodHygiene || (styles.shoppingFocus || []).length || (styles.contentFocus || []).length || styles.mobility || styles.longTour || styles.accommodationMove;
 }
 function renderProfileScreen(){
   renderProfilePicker();
@@ -1133,8 +1199,8 @@ function renderProfilePicker(){
 function countStyleChoices(styles){
   styles = Object.assign(defaultStyles(), styles || {});
   let count = 0;
-  ['stayType','stayPriority','activities','budgetPriority'].forEach(k => count += (styles[k] || []).length);
-  ['tourStyle','spicy','waitTime','restaurantType','reservation','transport','photoImportance'].forEach(k => { if(styles[k]) count++; });
+  ['stayType','stayPriority','activities','budgetPriority','stayLocation','shoppingFocus','contentFocus'].forEach(k => count += (styles[k] || []).length);
+  ['tourStyle','spicy','waitTime','restaurantType','reservation','transport','photoImportance','flightType','flightTime','arrivalTime','nightSafety','foodHygiene','mobility','longTour','accommodationMove'].forEach(k => { if(styles[k]) count++; });
   count += Object.keys(styles.dislikes || {}).length;
   return count;
 }
@@ -1230,9 +1296,21 @@ function renderStyleScreen(){
   buildChips('reservation', RESERVATION_OPTIONS, me.styles.reservation ? [me.styles.reservation] : []);
   buildChips('budgetPriority', BUDGET_PRIORITY_OPTIONS, me.styles.budgetPriority);
   buildChips('transport', TRANSPORT_OPTIONS, me.styles.transport ? [me.styles.transport] : []);
+  buildChips('flightType', FLIGHT_TYPE_OPTIONS, me.styles.flightType ? [me.styles.flightType] : []);
+  buildChips('flightTime', FLIGHT_TIME_OPTIONS, me.styles.flightTime ? [me.styles.flightTime] : []);
+  buildChips('arrivalTime', ARRIVAL_TIME_OPTIONS, me.styles.arrivalTime ? [me.styles.arrivalTime] : []);
+  buildChips('stayLocation', STAY_LOCATION_OPTIONS, me.styles.stayLocation || []);
+  buildChips('nightSafety', NIGHT_SAFETY_OPTIONS, me.styles.nightSafety ? [me.styles.nightSafety] : []);
+  buildChips('foodHygiene', FOOD_HYGIENE_OPTIONS, me.styles.foodHygiene ? [me.styles.foodHygiene] : []);
+  buildChips('shoppingFocus', SHOPPING_FOCUS_OPTIONS, me.styles.shoppingFocus || []);
+  buildChips('contentFocus', CONTENT_FOCUS_OPTIONS, me.styles.contentFocus || []);
+  buildChips('mobility', MOBILITY_OPTIONS, me.styles.mobility ? [me.styles.mobility] : []);
+  buildChips('longTour', LONG_TOUR_OPTIONS, me.styles.longTour ? [me.styles.longTour] : []);
+  buildChips('accommodationMove', ACCOMMODATION_MOVE_OPTIONS, me.styles.accommodationMove ? [me.styles.accommodationMove] : []);
   buildChips('photoImportance', PHOTO_OPTIONS, me.styles.photoImportance ? [me.styles.photoImportance] : []);
   document.getElementById('stayPriority').dataset.max = '2';
   document.getElementById('budgetPriority').dataset.max = '2';
+  document.getElementById('stayLocation').dataset.max = '2';
   renderIntensityRows();
   const budgetSlider = document.getElementById('budgetSlider');
   const paceSlider = document.getElementById('paceSlider');
@@ -1243,7 +1321,12 @@ function renderStyleScreen(){
   bindMultiChips('stayType','stayType'); bindMultiChips('stayPriority','stayPriority'); bindMultiChips('activities','activities');
   bindSingleChips('tourStyle','tourStyle'); bindSingleChips('spicy','spicy'); bindSingleChips('waitTime','waitTime');
   bindSingleChips('restaurantType','restaurantType'); bindSingleChips('reservation','reservation'); bindMultiChips('budgetPriority','budgetPriority');
-  bindSingleChips('transport','transport'); bindSingleChips('photoImportance','photoImportance');
+  bindSingleChips('transport','transport');
+  bindSingleChips('flightType','flightType'); bindSingleChips('flightTime','flightTime'); bindSingleChips('arrivalTime','arrivalTime');
+  bindMultiChips('stayLocation','stayLocation'); bindSingleChips('nightSafety','nightSafety'); bindSingleChips('foodHygiene','foodHygiene');
+  bindMultiChips('shoppingFocus','shoppingFocus'); bindMultiChips('contentFocus','contentFocus');
+  bindSingleChips('mobility','mobility'); bindSingleChips('longTour','longTour'); bindSingleChips('accommodationMove','accommodationMove');
+  bindSingleChips('photoImportance','photoImportance');
   document.getElementById('dislikes').querySelectorAll('.chip').forEach(chip => {
     chip.onclick = () => {
       const v = chip.dataset.v;
@@ -1281,18 +1364,41 @@ function renderSummaryBar(){
   document.getElementById('viewResultBtn').onclick = () => { renderResult(); goToScreen('result'); };
 }
 
-async function getExchangeRate(currency){
-  if(currency === 'KRW') return { rate:1, updatedAt:new Date(), source:'KRW' };
+function exchangeCurrencies(){
+  return [
+    { code:'KRW', label:'대한민국 원' },
+    { code:'USD', label:'미국 달러' },
+    { code:'JPY', label:'일본 엔' },
+    { code:'EUR', label:'유로' },
+    { code:'VND', label:'베트남 동' },
+    { code:'THB', label:'태국 바트' },
+    { code:'PHP', label:'필리핀 페소' },
+    { code:'IDR', label:'인도네시아 루피아' },
+    { code:'SGD', label:'싱가포르 달러' },
+    { code:'HKD', label:'홍콩 달러' },
+    { code:'AUD', label:'호주 달러' }
+  ];
+}
+function currencyName(code){
+  const found = exchangeCurrencies().find(c => c.code === code);
+  return found ? found.label : code;
+}
+function currencySelectOptions(selected){
+  return exchangeCurrencies().map(c => '<option value="' + c.code + '"' + (c.code === selected ? ' selected' : '') + '>' + c.label + '</option>').join('');
+}
+async function getExchangeRate(baseCurrency, targetCurrency){
+  if(baseCurrency === targetCurrency) return { baseCurrency, targetCurrency, rate:1, updatedAt:new Date(), source:'same' };
+  const key = baseCurrency + ':' + targetCurrency;
   const now = Date.now();
-  if(exchangeCache && exchangeCache.currency === currency && now - exchangeCache.time < 1000 * 60 * 60){
+  if(exchangeCache && exchangeCache.key === key && now - exchangeCache.time < 1000 * 60 * 60){
     return exchangeCache;
   }
-  const res = await fetch('https://open.er-api.com/v6/latest/KRW');
+  const res = await fetch('https://open.er-api.com/v6/latest/' + encodeURIComponent(baseCurrency));
   if(!res.ok) throw new Error('exchange fetch failed');
   const data = await res.json();
-  const rate = data?.rates?.[currency];
+  const rate = data?.rates?.[targetCurrency];
   if(!rate) throw new Error('currency not supported');
-  exchangeCache = { currency, rate, updatedAt:new Date(data.time_last_update_utc || Date.now()), time:now, source:'open.er-api.com' };
+  exchangeCache = { key, baseCurrency, targetCurrency, rate, updatedAt:new Date(data.time_last_update_utc || Date.now()), time:now, source:'open.er-api.com' };
   return exchangeCache;
 }
 function formatMoney(amount, currency){
@@ -1302,69 +1408,116 @@ function formatMoney(amount, currency){
     minimumFractionDigits: 0
   }).format(isFinite(amount) ? amount : 0) + ' ' + currency;
 }
+function formatRate(rate, currency){
+  const decimals = ['VND','IDR','KRW','JPY'].includes(currency) ? 0 : 5;
+  return new Intl.NumberFormat('ko-KR', { maximumFractionDigits: decimals, minimumFractionDigits: 0 }).format(isFinite(rate) ? rate : 0);
+}
+function defaultTargetCurrency(){
+  const c = state?.meta?.currency || 'USD';
+  return c === 'KRW' ? 'USD' : c;
+}
 function renderExchangeCard(){
   const card = document.getElementById('exchangeCard');
   if(!state){ card.innerHTML = ''; return; }
-  const currency = state.meta.currency || 'KRW';
-  const country = state.meta.countryName || '한국';
+  const baseCurrency = state.meta.exchangeBase || 'KRW';
+  const targetCurrency = state.meta.exchangeTarget || defaultTargetCurrency();
+  const baseAmount = state.meta.exchangeBaseAmount || 1;
   card.innerHTML =
     '<div class="exchange-top">' +
-      '<div><p class="exchange-label">Exchange rate</p><p class="exchange-title">' + escapeHtml(country) + ' · ' + escapeHtml(currency) + '</p><p class="exchange-rate-line" id="exchangeRateLine">환율을 불러오는 중...</p></div>' +
+      '<div><p class="exchange-label">Exchange rate</p><p class="exchange-title">환율 계산</p><p class="exchange-main-rate" id="exchangeMainRate">불러오는 중...</p><p class="exchange-rate-line" id="exchangeRateLine">화폐를 선택해서 바로 계산할 수 있어요.</p></div>' +
       '<button class="btn small" id="refreshExchangeBtn">새로고침</button>' +
     '</div>' +
-    '<div class="exchange-grid">' +
-      '<div class="exchange-box"><label>원화 → 현지 통화</label><input type="number" id="krwAmount" value="100000" min="0" /><p class="exchange-out" id="krwToForeign">-</p></div>' +
-      '<div class="exchange-box"><label>현지 통화 → 원화</label><input type="number" id="foreignAmount" value="" min="0" placeholder="현지 금액" /><p class="exchange-out" id="foreignToKrw">-</p></div>' +
+    '<div class="exchange-converter">' +
+      '<div class="exchange-row"><input type="number" id="exchangeBaseAmount" min="0" step="any" value="' + baseAmount + '" /><select id="exchangeBaseSelect">' + currencySelectOptions(baseCurrency) + '</select></div>' +
+      '<div class="exchange-row"><input type="number" id="exchangeTargetAmount" min="0" step="any" value="" /><select id="exchangeTargetSelect">' + currencySelectOptions(targetCurrency) + '</select></div>' +
+    '</div>' +
+    '<div class="exchange-tools">' +
       '<div class="exchange-box"><label>총 여행 예산 KRW</label><input type="number" id="budgetAmount" value="' + (state.meta.budgetKRW || '') + '" min="0" placeholder="예: 1200000" /><p class="exchange-out" id="budgetOutText">예산을 입력하면 1인 예산도 계산돼요.</p></div>' +
       '<div class="exchange-box"><label>환율 메모</label><p class="exchange-rate-line">환전, 카드 결제, 트래블카드 충전 시 실제 적용 환율과 수수료는 달라질 수 있어요.</p></div>' +
     '</div>' +
     '<p class="exchange-note" id="exchangeNote">실시간 환율 API를 기준으로 간단 계산합니다.</p>';
   document.getElementById('refreshExchangeBtn').onclick = () => { exchangeCache = null; renderExchangeCard(); };
-  getExchangeRate(currency).then(info => {
-    attachExchangeCalculator(info.rate, currency, info.updatedAt);
-  }).catch(err => {
-    console.error(err);
-    card.innerHTML = '<p class="exchange-error">환율을 불러오지 못했어요. 인터넷 연결 또는 환율 API 응답을 확인해주세요.</p>';
-  });
+  attachExchangeCalculatorShell();
 }
-function attachExchangeCalculator(rate, currency, updatedAt){
-  const krwInput = document.getElementById('krwAmount');
-  const foreignInput = document.getElementById('foreignAmount');
+function attachExchangeCalculatorShell(){
+  const baseInput = document.getElementById('exchangeBaseAmount');
+  const targetInput = document.getElementById('exchangeTargetAmount');
+  const baseSelect = document.getElementById('exchangeBaseSelect');
+  const targetSelect = document.getElementById('exchangeTargetSelect');
   const budgetInput = document.getElementById('budgetAmount');
   const rateLine = document.getElementById('exchangeRateLine');
+  const mainRate = document.getElementById('exchangeMainRate');
   const note = document.getElementById('exchangeNote');
-  if(!krwInput || !foreignInput || !budgetInput) return;
-  const oneForeignToKrw = currency === 'KRW' ? 1 : 1 / rate;
-  rateLine.textContent = currency === 'KRW'
-    ? '선택한 통화가 원화라 별도 환산이 필요 없어요.'
-    : '1 ' + currency + ' ≈ ' + formatMoney(oneForeignToKrw, 'KRW') + ' · 100,000 KRW ≈ ' + formatMoney(100000 * rate, currency);
-  note.textContent = '마지막 업데이트: ' + updatedAt.toLocaleString('ko-KR') + ' · 실제 환전/카드 결제 수수료는 별도입니다.';
-  function updateFromKRW(){
-    const krw = parseFloat(krwInput.value || '0');
-    document.getElementById('krwToForeign').textContent = formatMoney(krw, 'KRW') + ' ≈ ' + formatMoney(krw * rate, currency);
+  if(!baseInput || !targetInput || !baseSelect || !targetSelect || !budgetInput) return;
+  let lastEdited = 'base';
+
+  async function refreshRate(){
+    const base = baseSelect.value;
+    const target = targetSelect.value;
+    state.meta.exchangeBase = base;
+    state.meta.exchangeTarget = target;
+    state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 1;
+    saveTrip();
+    mainRate.textContent = '불러오는 중...';
+    rateLine.textContent = currencyName(base) + ' → ' + currencyName(target);
+    try{
+      const info = await getExchangeRate(base, target);
+      const rate = info.rate;
+      mainRate.innerHTML = '1 <span class="unit">' + escapeHtml(currencyName(base)) + ' =</span><br>' + formatRate(rate, target) + ' <span class="unit">' + escapeHtml(currencyName(target)) + '</span>';
+      note.textContent = '마지막 업데이트: ' + info.updatedAt.toLocaleString('ko-KR') + ' · 실제 환전/카드 결제 수수료는 별도입니다.';
+      function updateFromBase(){
+        const v = parseFloat(baseInput.value || '0');
+        targetInput.value = isFinite(v) ? trimNumber(v * rate, target) : '';
+        updateBudget(rate, target);
+      }
+      function updateFromTarget(){
+        const v = parseFloat(targetInput.value || '0');
+        baseInput.value = isFinite(v) ? trimNumber(v / rate, base) : '';
+        state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 1;
+        saveTrip();
+        updateBudget(rate, target);
+      }
+      baseInput.oninput = () => { lastEdited = 'base'; state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 1; updateFromBase(); saveTrip(); };
+      targetInput.oninput = () => { lastEdited = 'target'; updateFromTarget(); };
+      budgetInput.oninput = () => updateBudget(rate, target, true);
+      if(lastEdited === 'target') updateFromTarget(); else updateFromBase();
+    }catch(err){
+      console.error(err);
+      mainRate.textContent = '환율을 불러오지 못했어요.';
+      rateLine.textContent = '인터넷 연결 또는 환율 API 응답을 확인해주세요.';
+    }
   }
-  function updateFromForeign(){
-    const foreign = parseFloat(foreignInput.value || '0');
-    document.getElementById('foreignToKrw').textContent = formatMoney(foreign, currency) + ' ≈ ' + formatMoney(foreign * oneForeignToKrw, 'KRW');
-  }
-  function updateBudget(shouldSave=false){
-    const budget = parseFloat(budgetInput.value || '0');
-    const group = state.meta.groupSize || 1;
-    if(!budget){
-      document.getElementById('budgetOutText').textContent = '예산을 입력하면 1인 예산도 계산돼요.';
+  baseSelect.onchange = refreshRate;
+  targetSelect.onchange = refreshRate;
+  refreshRate();
+}
+function trimNumber(value, currency){
+  const zeroDecimal = ['KRW','JPY','VND','IDR'];
+  if(!isFinite(value)) return '';
+  if(zeroDecimal.includes(currency)) return String(Math.round(value));
+  return String(Math.round(value * 100) / 100);
+}
+function updateBudget(rate, targetCurrency, shouldSave=false){
+  const budgetInput = document.getElementById('budgetAmount');
+  const out = document.getElementById('budgetOutText');
+  if(!budgetInput || !out) return;
+  const budget = parseFloat(budgetInput.value || '0');
+  const group = state.meta.groupSize || 1;
+  if(!budget){
+    out.textContent = '예산을 입력하면 1인 예산도 계산돼요.';
+  }else{
+    const per = budget / group;
+    const krwToTarget = state.meta.exchangeBase === 'KRW' ? rate : null;
+    if(krwToTarget){
+      out.textContent = '총 ' + formatMoney(budget, 'KRW') + ' ≈ ' + formatMoney(budget * krwToTarget, targetCurrency) + ' · 1인 약 ' + formatMoney(per * krwToTarget, targetCurrency);
     }else{
-      const per = budget / group;
-      document.getElementById('budgetOutText').textContent = '총 ' + formatMoney(budget, 'KRW') + ' ≈ ' + formatMoney(budget * rate, currency) + ' · 1인 약 ' + formatMoney(per * rate, currency);
-    }
-    if(shouldSave){
-      state.meta.budgetKRW = budget || null;
-      saveTrip();
+      out.textContent = '총 ' + formatMoney(budget, 'KRW') + ' · 1인 약 ' + formatMoney(per, 'KRW') + ' / 위 계산기에서 KRW를 기준 통화로 두면 현지 통화 예산도 볼 수 있어요.';
     }
   }
-  krwInput.oninput = updateFromKRW;
-  foreignInput.oninput = updateFromForeign;
-  budgetInput.oninput = () => updateBudget(true);
-  updateFromKRW(); updateFromForeign(); updateBudget(false);
+  if(shouldSave){
+    state.meta.budgetKRW = budget || null;
+    saveTrip();
+  }
 }
 
 function renderChecklist(){
@@ -1447,6 +1600,11 @@ function mode(arr){
   arr.filter(Boolean).forEach(v => { counts[v] = (counts[v] || 0) + 1; });
   return Object.keys(counts).sort((a,b) => counts[b] - counts[a])[0] || null;
 }
+function topMulti(participants, key, limit=3){
+  const counts = {};
+  participants.forEach(p => (p.styles?.[key] || []).forEach(v => { counts[v] = (counts[v] || 0) + 1; }));
+  return Object.keys(counts).sort((a,b) => counts[b] - counts[a]).slice(0, limit);
+}
 function tripInfo(){
   const start = state?.meta?.startDate;
   const end = state?.meta?.endDate;
@@ -1487,6 +1645,17 @@ function computeAggregate(){
     reservation:mode(participants.map(p => p.styles.reservation)),
     transport:mode(participants.map(p => p.styles.transport)),
     photoImportance:mode(participants.map(p => p.styles.photoImportance)),
+    flightType:mode(participants.map(p => p.styles.flightType)),
+    flightTime:mode(participants.map(p => p.styles.flightTime)),
+    arrivalTime:mode(participants.map(p => p.styles.arrivalTime)),
+    nightSafety:mode(participants.map(p => p.styles.nightSafety)),
+    foodHygiene:mode(participants.map(p => p.styles.foodHygiene)),
+    mobility:mode(participants.map(p => p.styles.mobility)),
+    longTour:mode(participants.map(p => p.styles.longTour)),
+    accommodationMove:mode(participants.map(p => p.styles.accommodationMove)),
+    topStayLocations:topMulti(participants, 'stayLocation', 3),
+    topShoppingFocus:topMulti(participants, 'shoppingFocus', 3),
+    topContentFocus:topMulti(participants, 'contentFocus', 3),
     dislikeSet
   };
 }
@@ -1542,6 +1711,32 @@ function scoreDestination(dest, agg, info){
   const event = analyzeEvents(dest, info.month);
   score += event.score;
   if(dest.countryCode === state.meta.countryCode) score += 4;
+
+  if(agg.flightTime === '짧게'){
+    if(dest.flightHours.includes('장거리') || dest.flightHours.includes('7시간')){ score -= 10; reasons.push('비행시간 짧게를 선호하는 그룹에게는 항공 피로도가 클 수 있어요.'); }
+    else { score += 4; reasons.push('비행시간 부담이 비교적 낮은 편이에요.'); }
+  }else if(agg.flightTime === '중거리'){
+    if(dest.flightHours.includes('장거리')){ score -= 5; reasons.push('중거리까지 선호하는 그룹에게는 장거리 비행이 부담일 수 있어요.'); }
+    else score += 2;
+  }else if(agg.flightTime === '장거리' && dest.flightHours.includes('장거리')){
+    score += 4; reasons.push('장거리 이동도 허용하는 그룹이라 선택지가 넓어요.');
+  }
+  if(agg.arrivalTime === '낮도착' && (dest.flightHours.includes('장거리') || dest.flightHours.includes('7시간'))){
+    reasons.push('낮 도착을 원하면 항공편 시간대 확인이 중요해요.');
+  }
+  if(agg.nightSafety === '매우중요' && dest.tags.includes('나이트라이프')){
+    score -= 3; reasons.push('밤 이동을 최소화하려면 숙소 위치와 귀가 동선을 더 보수적으로 잡는 게 좋아요.');
+  }
+  if(agg.mobility === '적게걷기' && dest.pace === '알차게 빡빡'){
+    score -= 4; reasons.push('많이 걷는 일정이 되기 쉬워 이동 동선을 짧게 잡는 편이 좋아요.');
+  }
+  if(agg.longTour === '싫음' && Math.max(...dest.idealNights) >= 6){
+    score -= 2; reasons.push('근교 이동 없이 시내 중심으로 일정을 압축하는 편이 잘 맞아요.');
+  }
+  if(agg.topContentFocus.includes('바다수영장') && (dest.tags.includes('물놀이') || dest.tags.includes('휴양'))) score += 4;
+  if(agg.topContentFocus.includes('도시야경') && (dest.tags.includes('나이트라이프') || dest.tags.includes('사진명소'))) score += 3;
+  if(agg.topShoppingFocus.length && dest.tags.includes('쇼핑')) score += 3;
+
   return {
     dest,
     score:clamp(Math.round(score), 30, 96),
@@ -1568,22 +1763,37 @@ function renderResult(){
   if(agg.spicy) tags.push('매운맛: ' + labelOf(SPICY_OPTIONS, agg.spicy));
   if(agg.waitTime) tags.push('웨이팅: ' + labelOf(WAIT_TIME_OPTIONS, agg.waitTime));
   if(agg.transport) tags.push(labelOf(TRANSPORT_OPTIONS, agg.transport));
+  if(agg.flightType) tags.push('항공: ' + labelOf(FLIGHT_TYPE_OPTIONS, agg.flightType));
+  if(agg.arrivalTime) tags.push('도착: ' + labelOf(ARRIVAL_TIME_OPTIONS, agg.arrivalTime));
+  if(agg.nightSafety) tags.push('밤 이동: ' + labelOf(NIGHT_SAFETY_OPTIONS, agg.nightSafety));
+  if(agg.foodHygiene) tags.push('위생: ' + labelOf(FOOD_HYGIENE_OPTIONS, agg.foodHygiene));
+  if(agg.mobility) tags.push('이동량: ' + labelOf(MOBILITY_OPTIONS, agg.mobility));
   if(agg.photoImportance) tags.push(labelOf(PHOTO_OPTIONS, agg.photoImportance));
+  if(agg.topStayLocations.length) tags.push('숙소 위치: ' + agg.topStayLocations.map(v => labelOf(STAY_LOCATION_OPTIONS, v)).join(', '));
+  if(agg.topContentFocus.length) tags.push('콘텐츠: ' + agg.topContentFocus.map(v => labelOf(CONTENT_FOCUS_OPTIONS, v)).join(', '));
   const dislikeKeys = Object.keys(agg.dislikeSet);
   if(dislikeKeys.length) tags.push('기피 재료: ' + dislikeKeys.map(k => labelOf(DISLIKE_OPTIONS,k)).join(', '));
   const scored = DESTINATIONS.map(d => scoreDestination(d, agg, info)).sort((a,b) => b.score - a.score).slice(0,3);
   body.innerHTML =
     '<div class="result-summary"><p>' + escapeHtml(summary) + '</p><div class="result-stats">' + tags.map(t => '<span class="result-tag">' + escapeHtml(t) + '</span>').join('') + '</div></div>' +
     '<div class="rec-board"><div class="rec-section-title"><h3>추천 여행지 TOP 3</h3><p>취향 + 일정 길이 + 실제 시즌성 + 현지 행사 기준<br>축제 날짜는 매년 변동될 수 있어요.</p></div>' +
-    scored.map((item, idx) => renderRecommendationCard(item, idx + 1, info)).join('') +
+    scored.map((item, idx) => renderRecommendationCard(item, idx + 1, info, agg)).join('') +
     '<p class="rec-disclaimer">※ 날씨/축제 분석은 도시별 대표적인 기후 패턴과 알려진 주요 행사 시즌을 기준으로 한 사전 체크용 정보입니다. 실제 출발 전에는 항공권, 숙소 가격, 공식 행사 일정, 기상 예보를 다시 확인해주세요.</p></div>';
 }
-function renderRecommendationCard(item, rank, info){
+function renderRecommendationCard(item, rank, info, agg){
   const d = item.dest;
   const cardClass = rank === 1 ? 'rec-card top' : 'rec-card';
   const durationType = item.duration.percent >= 90 ? 'good' : item.duration.percent >= 70 ? 'warn' : 'risk';
   const eventType = item.event.score > 0 ? 'warn' : 'good';
   const countryMatch = d.countryCode === state.meta.countryCode;
+  const conditionLines = [];
+  if(agg.flightType) conditionLines.push('항공편: ' + labelOf(FLIGHT_TYPE_OPTIONS, agg.flightType));
+  if(agg.flightTime) conditionLines.push('비행시간: ' + labelOf(FLIGHT_TIME_OPTIONS, agg.flightTime));
+  if(agg.arrivalTime) conditionLines.push('도착 시간: ' + labelOf(ARRIVAL_TIME_OPTIONS, agg.arrivalTime));
+  if(agg.nightSafety) conditionLines.push('밤 이동: ' + labelOf(NIGHT_SAFETY_OPTIONS, agg.nightSafety));
+  if(agg.mobility) conditionLines.push('이동량: ' + labelOf(MOBILITY_OPTIONS, agg.mobility));
+  if(agg.foodHygiene) conditionLines.push('음식·위생: ' + labelOf(FOOD_HYGIENE_OPTIONS, agg.foodHygiene));
+  if(agg.topStayLocations.length) conditionLines.push('숙소 위치: ' + agg.topStayLocations.map(v => labelOf(STAY_LOCATION_OPTIONS, v)).join(', '));
   const tags = [
     '<span class="rec-tag good">' + escapeHtml(d.bestFor.split(' ').slice(0,3).join(' ')) + '</span>',
     '<span class="rec-tag ' + durationType + '">' + escapeHtml(item.duration.badge) + '</span>',
@@ -1609,6 +1819,7 @@ function renderRecommendationCard(item, rank, info){
         '<div class="analysis-box weather"><h4>날씨 / 시즌</h4><p>' + escapeHtml(item.climate.text) + '</p></div>' +
         '<div class="analysis-box event"><h4>현지 축제 / 행사</h4><p>' + escapeHtml(item.event.text) + '</p></div>' +
         '<div class="analysis-box caution"><h4>일정 / 주의점</h4><p>' + escapeHtml(item.duration.text + ' ' + d.caution) + '</p></div>' +
+        '<div class="analysis-box"><h4>항공 / 이동 조건</h4><ul>' + (conditionLines.length ? conditionLines.map(v => '<li>' + escapeHtml(v) + '</li>').join('') : '<li>항공·이동 관련 선호가 아직 적어요.</li>') + '</ul></div>' +
       '</div>' +
     '</div>' +
   '</div>';
