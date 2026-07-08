@@ -774,7 +774,7 @@ input[type=range]{
         <button class="btn" id="joinBtn">코드로 불러오기</button>
       </div>
       <div class="code-status" id="codeStatus">
-        이 버전은 현재 브라우저에 저장됩니다. 다른 기기와 실시간 공유하려면 Firebase 연결이 필요해요.
+        Firebase에 연결되어 있어요. 같은 여행 코드를 입력하면 다른 기기에서도 함께 체크할 수 있어요.
       </div>
     </div>
   </div>
@@ -925,7 +925,7 @@ input[type=range]{
 
     <p class="footnote">
       여행 코드: <code id="footCode">-</code> · <button class="link-btn" id="copyBtn">코드 복사</button><br>
-      현재 브라우저에 저장됩니다.
+      Firebase에 실시간 저장됩니다.
     </p>
   </div>
 
@@ -942,7 +942,36 @@ input[type=range]{
 
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  onSnapshot,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {
+  getAuth,
+  signInAnonymously
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDJDxssSQP3IRdWw_yUcK0Hf3hezdD97Jk",
+  authDomain: "travel-38bf9.firebaseapp.com",
+  projectId: "travel-38bf9",
+  storageBucket: "travel-38bf9.firebasestorage.app",
+  messagingSenderId: "444201575816",
+  appId: "1:444201575816:web:bc03960c8fe9fcbde1063d"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+let firebaseReady = signInAnonymously(auth);
+let unsubscribeTrip = null;
+
 const PARTICIPANT_COLORS = ['#FFB627','#2F9E8F','#E8654F','#7C83FD','#4EA8DE','#F2C14E','#B388EB','#FF8FA3'];
 
 const ACTIVITY_OPTIONS = [
@@ -1074,18 +1103,82 @@ function escapeHtml(str){
   return d.innerHTML;
 }
 
-function storageKey(code){
-  return 'trip-checklist:' + code;
+function tripRef(code){
+  return doc(db, 'trips', code);
 }
 
-function saveToStorage(code, data){
-  localStorage.setItem(storageKey(code), JSON.stringify(data));
+function cleanStateForSave(data){
+  return JSON.parse(JSON.stringify({
+    participants: data.participants || [],
+    meta: data.meta || { groupSize: 2, startDate: null, endDate: null },
+    categories: data.categories || []
+  }));
 }
 
-function loadFromStorage(code){
-  const raw = localStorage.getItem(storageKey(code));
-  if(!raw) return null;
-  return JSON.parse(raw);
+function cleanStateFromFirestore(data){
+  const copy = {
+    participants: data.participants || [],
+    meta: data.meta || { groupSize: 2, startDate: null, endDate: null },
+    categories: data.categories || []
+  };
+
+  return normalizeState(copy);
+}
+
+async function saveToFirestore(code, data){
+  await firebaseReady;
+  const clean = cleanStateForSave(data);
+
+  await setDoc(tripRef(code), {
+    ...clean,
+    updatedAt: serverTimestamp()
+  });
+}
+
+async function loadFromFirestore(code){
+  await firebaseReady;
+  const snap = await getDoc(tripRef(code));
+
+  if(!snap.exists()){
+    return null;
+  }
+
+  return cleanStateFromFirestore(snap.data());
+}
+
+function getActiveScreenName(){
+  const active = document.querySelector('.screen.active');
+  return active ? active.id.replace('screen-', '') : '';
+}
+
+function listenTrip(code){
+  if(unsubscribeTrip){
+    unsubscribeTrip();
+  }
+
+  unsubscribeTrip = onSnapshot(tripRef(code), (snap) => {
+    if(!snap.exists()) return;
+
+    state = cleanStateFromFirestore(snap.data());
+
+    const screen = getActiveScreenName();
+
+    if(screen === 'checklist'){
+      renderSummaryBar();
+      renderChecklist();
+    }
+
+    if(screen === 'profile'){
+      renderParticipantList();
+    }
+
+    if(screen === 'result'){
+      renderResult();
+    }
+  }, (err) => {
+    console.error('realtime listener error', err);
+    showStatus('실시간 연결 중 오류가 생겼어요. Firestore Rules와 Authentication을 확인해주세요.');
+  });
 }
 
 function showStatus(message, active=false){
@@ -1117,53 +1210,76 @@ function goToScreen(name){
 
 function saveTrip(){
   if(!currentCode || !state) return;
+
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => {
-    saveToStorage(currentCode, state);
-  }, 200);
+
+  saveTimer = setTimeout(async () => {
+    try{
+      await saveToFirestore(currentCode, state);
+    }catch(err){
+      console.error('save error', err);
+      showStatus('저장 중 오류가 생겼어요. 인터넷 연결 또는 Firebase 설정을 확인해주세요.');
+    }
+  }, 250);
 }
 
-function createNewTrip(){
-  let code = randomCode();
+async function createNewTrip(){
+  showStatus('새 여행 코드를 만드는 중...');
 
-  while(localStorage.getItem(storageKey(code))){
-    code = randomCode();
+  try{
+    await firebaseReady;
+
+    let code = randomCode();
+
+    while((await getDoc(tripRef(code))).exists()){
+      code = randomCode();
+    }
+
+    currentCode = code;
+    state = defaultState();
+
+    await saveToFirestore(currentCode, state);
+    listenTrip(currentCode);
+
+    document.getElementById('codeInput').value = currentCode;
+    document.getElementById('footCode').textContent = currentCode;
+
+    showStatus('여행 코드가 만들어졌어요. 친구에게 이 코드를 알려주세요: ' + currentCode, true);
+
+    document.getElementById('groupCount').textContent = state.meta.groupSize;
+    planTemp.start = state.meta.startDate;
+    planTemp.end = state.meta.endDate;
+
+    setupCalendarSelects();
+    renderCalendar();
+    goToScreen('plan');
+  }catch(err){
+    console.error('create trip error', err);
+    showStatus('Firebase에 여행을 만들지 못했어요. Firestore Rules, Authentication, firebaseConfig를 확인해주세요.');
   }
-
-  currentCode = code;
-  state = defaultState();
-
-  saveToStorage(currentCode, state);
-
-  document.getElementById('codeInput').value = currentCode;
-  document.getElementById('footCode').textContent = currentCode;
-
-  showStatus('여행 코드가 만들어졌어요. 이 코드를 메모해두세요: ' + currentCode, true);
-
-  document.getElementById('groupCount').textContent = state.meta.groupSize;
-  planTemp.start = state.meta.startDate;
-  planTemp.end = state.meta.endDate;
-
-  setupCalendarSelects();
-  renderCalendar();
-  goToScreen('plan');
 }
 
-function joinTrip(code){
+async function joinTrip(code){
   if(!code){
     showStatus('코드를 입력해주세요.');
     return;
   }
 
+  showStatus('Firebase에서 여행 코드를 불러오는 중...');
+
   try{
-    const loaded = loadFromStorage(code);
+    await firebaseReady;
+    const loaded = await loadFromFirestore(code);
+
     if(!loaded){
-      showStatus('저장된 코드를 찾을 수 없어요. 이 브라우저에서 만든 코드인지 확인해주세요.');
+      showStatus('해당 여행 코드를 찾을 수 없어요. 코드를 다시 확인해주세요.');
       return;
     }
 
     currentCode = code;
-    state = normalizeState(loaded);
+    state = loaded;
+
+    listenTrip(currentCode);
 
     document.getElementById('footCode').textContent = currentCode;
     document.getElementById('groupCount').textContent = state.meta.groupSize || 2;
@@ -1179,8 +1295,8 @@ function joinTrip(code){
     showStatus('여행 코드 ' + currentCode + ' 를 불러왔어요.', true);
     goToScreen('profile');
   }catch(err){
-    console.error(err);
-    showStatus('불러오는 중 오류가 생겼어요. 저장 데이터가 손상됐을 수 있어요.');
+    console.error('join trip error', err);
+    showStatus('Firebase에서 불러오지 못했어요. 인터넷 연결, Firestore Rules, Authentication, firebaseConfig를 확인해주세요.');
   }
 }
 
