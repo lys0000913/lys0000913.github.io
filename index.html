@@ -233,28 +233,27 @@ input[type=range]{width:100%;accent-color:var(--teal-dim);height:4px;margin:4px 
   color:var(--ink);
   border:1px solid var(--paper-dim);
   border-radius:8px;
-  padding:14px 16px;
-  margin-bottom:12px;
-  box-shadow:0 6px 14px rgba(17,23,42,.07);
+  padding:10px 12px;
+  margin-bottom:10px;
+  box-shadow:0 4px 10px rgba(17,23,42,.055);
 }
-.exchange-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
-.exchange-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-dim);margin:0 0 4px;}
-.exchange-title{font-size:15px;font-weight:700;margin:0;color:var(--ink);}
-.exchange-main-rate{font-size:24px;line-height:1.12;font-weight:700;color:var(--ink);margin:5px 0 2px;letter-spacing:-.03em;}
-.exchange-main-rate .unit{font-size:12px;font-weight:600;color:var(--ink-soft);letter-spacing:0;}
-.exchange-rate-line{font-size:12px;color:var(--ink-soft);line-height:1.45;margin:4px 0 0;}
-.exchange-updated{font-size:10px;color:var(--ink-soft);white-space:nowrap;}
-.exchange-converter{display:grid;grid-template-columns:1fr;gap:7px;margin-top:10px;}
-.exchange-row{display:grid;grid-template-columns:1fr 170px;align-items:center;border:1px solid var(--paper-dim);border-radius:6px;background:#fff;overflow:hidden;}
-.exchange-row input{border:none;border-radius:0;padding:10px 12px;font-size:14px;width:100%;}
-.exchange-row select{height:100%;border:none;border-left:1px solid var(--paper-dim);border-radius:0;background:#fff;padding:0 12px;font-size:12px;color:var(--ink);}
-.exchange-tools{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
-.exchange-box{background:#fffaf0;border:1px solid rgba(184,127,19,.22);border-radius:6px;padding:10px;}
-.exchange-box label{display:block;font-size:11px;font-weight:600;margin-bottom:5px;color:var(--ink);}
-.exchange-box input{width:100%;padding:9px 10px;font-size:13px;}
-.exchange-out{font-family:'Space Mono',monospace;font-size:12px;color:var(--teal-dim);margin:7px 0 0;word-break:break-word;}
-.exchange-note{font-size:10px;color:var(--ink-soft);line-height:1.45;margin:8px 0 0;}
-.exchange-error{font-size:12px;color:var(--coral-dim);line-height:1.5;margin:0;}
+.exchange-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:6px;}
+.exchange-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-dim);margin:0 0 3px;}
+.exchange-title{font-size:13px;font-weight:700;margin:0;color:var(--ink);}
+.exchange-main-rate{font-size:18px;line-height:1.18;font-weight:700;color:var(--ink);margin:4px 0 1px;letter-spacing:-.03em;}
+.exchange-main-rate .unit{font-size:10px;font-weight:600;color:var(--ink-soft);letter-spacing:0;}
+.exchange-rate-line{font-size:11px;color:var(--ink-soft);line-height:1.35;margin:3px 0 0;}
+.exchange-converter{display:grid;grid-template-columns:1fr;gap:5px;margin-top:8px;}
+.exchange-row{display:grid;grid-template-columns:1fr 145px;align-items:center;border:1px solid var(--paper-dim);border-radius:6px;background:#fff;overflow:hidden;}
+.exchange-row input{border:none;border-radius:0;padding:8px 10px;font-size:13px;width:100%;}
+.exchange-row select{height:100%;border:none;border-left:1px solid var(--paper-dim);border-radius:0;background:#fff;padding:0 10px;font-size:11px;color:var(--ink);}
+.exchange-tools{display:grid;grid-template-columns:1fr;gap:6px;margin-top:7px;}
+.exchange-box{background:#fffaf0;border:1px solid rgba(184,127,19,.20);border-radius:6px;padding:8px;}
+.exchange-box label{display:block;font-size:10px;font-weight:600;margin-bottom:4px;color:var(--ink);}
+.exchange-box input{width:100%;padding:7px 9px;font-size:12px;}
+.exchange-out{font-family:'Space Mono',monospace;font-size:11px;color:var(--teal-dim);margin:5px 0 0;word-break:break-word;}
+.exchange-note{font-size:9px;color:var(--ink-soft);line-height:1.35;margin:6px 0 0;}
+.exchange-error{font-size:11px;color:var(--coral-dim);line-height:1.45;margin:0;}
 
 .stub{display:flex;align-items:center;justify-content:space-between;background:var(--paper);color:var(--ink);border-radius:6px;padding:18px 22px;margin-bottom:16px;position:relative;overflow:hidden;}
 .stub:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:repeating-linear-gradient(180deg, var(--coral) 0 8px, transparent 8px 16px);}
@@ -377,7 +376,7 @@ input[type=range]{width:100%;accent-color:var(--teal-dim);height:4px;margin:4px 
   <div class="screen" id="screen-plan">
     <div class="panel">
       <h2>몇 명이서, 언제 떠나나요?</h2>
-      <p class="sub">인원 수, 여행 날짜, 환율 확인용 국가/통화를 정해주세요. 나중에 다시 바꿀 수 있어요.</p>
+      <p class="sub">인원 수와 여행 날짜를 정해주세요. 나중에 다시 바꿀 수 있어요.</p>
 
       <p style="font-size:13px;font-weight:500;margin:0 0 8px;">인원 수</p>
       <div class="stepper">
@@ -387,11 +386,6 @@ input[type=range]{width:100%;accent-color:var(--teal-dim);height:4px;margin:4px 
         <span style="font-size:13px;color:var(--ink-soft);">명</span>
       </div>
 
-      <div style="margin-top:22px;">
-        <label class="field-label" for="countrySelect">여행 국가 / 통화</label>
-        <select id="countrySelect" style="width:100%;"></select>
-        <p class="field-help" id="countryHelp">체크리스트에서 환율 계산 카드에 사용돼요.</p>
-      </div>
 
       <div class="cal-head">
         <div class="cal-nav">
@@ -841,7 +835,163 @@ const DESTINATIONS = [
     caution:'여름은 비와 태풍 변수가 있고, 렌터카·숙소 위치에 따라 이동 피로도가 크게 달라져요.',
     bestFor:'국내에서 부담 없이 자연, 카페, 맛집, 사진 스팟을 즐기고 싶은 그룹에게 좋아요.',
     itinerary:'2박 3일은 한 권역 중심, 3박 4일 이상이면 동서남북 이동을 조금 더 여유롭게 잡을 수 있어요.'
+  },
+  {
+    id:'london', name:'런던, 영국', country:'영국', countryCode:'GB', currency:'GBP', region:'유럽',
+    tags:['유적','쇼핑','사진명소','맛집탐방'], budget:'플렉스', pace:'적당히', idealNights:[4,5,6,7], flightHours:'장거리 약 14시간 이상',
+    bestMonths:[5,6,7,9,10,12], okayMonths:[3,4,8,11], rainyMonths:[1,2,11,12], typhoonMonths:[], hotMonths:[7,8], coldMonths:[1,2],
+    events:[
+      { name:'노팅힐 카니발', months:[8], note:'런던 대표 거리 축제로 분위기가 강하지만 인파와 교통 통제를 고려해야 해요.' },
+      { name:'윈터 원더랜드', months:[11,12], note:'겨울 시즌 하이드파크 중심의 대형 겨울 행사로 연말 분위기가 좋아요.' },
+      { name:'윔블던', months:[6,7], note:'스포츠와 잔디 시즌의 도시 분위기를 느끼기 좋지만 티켓과 숙소 비용을 확인해야 해요.' }
+    ],
+    caution:'날씨가 변덕스러워 우산과 실내 일정 대안이 필요하고, 물가와 숙소비가 높은 편이에요.',
+    bestFor:'뮤지컬, 박물관, 쇼핑, 감성 거리 산책을 좋아하는 그룹에게 좋아요.',
+    itinerary:'5박 이상이면 런던 도심과 근교 하루를 섞기 좋아요.'
+  },
+  {
+    id:'barcelona', name:'바르셀로나, 스페인', country:'스페인', countryCode:'ES', currency:'EUR', region:'유럽',
+    tags:['유적','사진명소','맛집탐방','나이트라이프'], budget:'플렉스', pace:'적당히', idealNights:[4,5,6], flightHours:'장거리 약 15시간 이상',
+    bestMonths:[4,5,6,9,10], okayMonths:[3,7,8,11], rainyMonths:[10,11], typhoonMonths:[], hotMonths:[7,8], coldMonths:[1,2],
+    events:[
+      { name:'라 메르세 축제', months:[9], note:'도시 전역에서 퍼레이드와 공연이 열리는 대표 축제로 현지 분위기가 강해요.' },
+      { name:'그라시아 거리 축제', months:[8], note:'동네 전체가 장식되는 여름 축제지만 더위와 인파를 고려해야 해요.' }
+    ],
+    caution:'여름은 덥고 관광객이 많아요. 인기 건축물은 사전 예약이 필요해요.',
+    bestFor:'가우디 건축, 타파스, 바다, 야경을 함께 즐기고 싶은 그룹에게 좋아요.',
+    itinerary:'4박 5일이면 사그라다 파밀리아, 구엘공원, 고딕지구, 해변 일정을 균형 있게 넣을 수 있어요.'
+  },
+  {
+    id:'rome', name:'로마, 이탈리아', country:'이탈리아', countryCode:'IT', currency:'EUR', region:'유럽',
+    tags:['유적','맛집탐방','사진명소'], budget:'플렉스', pace:'알차게 빡빡', idealNights:[4,5,6], flightHours:'장거리 약 14시간 이상',
+    bestMonths:[4,5,6,9,10], okayMonths:[3,7,11], rainyMonths:[11,12], typhoonMonths:[], hotMonths:[7,8], coldMonths:[1,2],
+    events:[
+      { name:'로마 생일 축제', months:[4], note:'고대 로마 재현 행사와 퍼레이드가 열리는 시즌이에요.' },
+      { name:'성주간·부활절 행사', months:[3,4], note:'바티칸과 로마 중심의 종교 행사로 특별하지만 혼잡도가 높아요.' }
+    ],
+    caution:'여름은 폭염과 인파가 강하고, 주요 유적지는 예약과 동선 관리가 중요해요.',
+    bestFor:'유적, 미술, 파스타·젤라토, 골목 산책을 좋아하는 그룹에게 좋아요.',
+    itinerary:'4박 5일 이상이면 로마 핵심 유적과 바티칸을 무리 없이 볼 수 있어요.'
+  },
+  {
+    id:'prague-vienna', name:'프라하·빈', country:'체코/오스트리아', countryCode:'CZ', currency:'EUR', region:'유럽',
+    tags:['유적','사진명소','맛집탐방'], budget:'적당히', pace:'적당히', idealNights:[5,6,7], flightHours:'장거리 약 14시간 이상',
+    bestMonths:[4,5,6,9,10,12], okayMonths:[3,7,8,11], rainyMonths:[6,7], typhoonMonths:[], hotMonths:[7,8], coldMonths:[1,2],
+    events:[
+      { name:'프라하 봄 국제음악제', months:[5], note:'클래식과 도시 분위기를 함께 즐기기 좋은 시즌이에요.' },
+      { name:'빈 크리스마스 마켓', months:[11,12], note:'겨울 분위기는 매우 좋지만 숙소 가격과 추위 대비가 필요해요.' }
+    ],
+    caution:'도시 간 이동이 있어 숙소 이동 가능 여부가 중요하고, 겨울은 추위가 강해요.',
+    bestFor:'동화 같은 도시 풍경, 클래식, 카페, 야경을 좋아하는 그룹에게 좋아요.',
+    itinerary:'5박 이상이면 프라하와 빈을 나눠 보기 좋아요.'
+  },
+  {
+    id:'amsterdam', name:'암스테르담, 네덜란드', country:'네덜란드', countryCode:'NL', currency:'EUR', region:'유럽',
+    tags:['유적','사진명소','맛집탐방'], budget:'플렉스', pace:'적당히', idealNights:[3,4,5], flightHours:'장거리 약 14시간 이상',
+    bestMonths:[4,5,6,9], okayMonths:[3,7,8,10], rainyMonths:[10,11,12], typhoonMonths:[], hotMonths:[7,8], coldMonths:[1,2],
+    events:[
+      { name:'킹스데이', months:[4], note:'도시 전체가 오렌지빛 축제 분위기가 되는 대표 행사예요. 인파와 숙소 비용을 고려해야 해요.' },
+      { name:'튤립 시즌', months:[4,5], note:'근교 꽃밭과 사진 일정 만족도가 높아지는 시즌이에요.' }
+    ],
+    caution:'비와 바람이 잦아 실내 미술관 일정과 함께 구성하는 편이 안정적이에요.',
+    bestFor:'운하, 미술관, 감성 사진, 자전거 도시 분위기를 좋아하는 그룹에게 좋아요.',
+    itinerary:'4박 5일이면 도심과 근교 튤립/풍차 일정을 섞기 좋아요.'
+  },
+  {
+    id:'interlaken', name:'인터라켄·스위스', country:'스위스', countryCode:'CH', currency:'CHF', region:'유럽',
+    tags:['사진명소','액티비티','휴양'], budget:'플렉스', pace:'적당히', idealNights:[5,6,7], flightHours:'장거리 약 15시간 이상',
+    bestMonths:[6,7,8,9], okayMonths:[5,10,12], rainyMonths:[5,6], typhoonMonths:[], hotMonths:[], coldMonths:[1,2,3,12],
+    events:[
+      { name:'스위스 내셔널 데이', months:[8], note:'불꽃과 지역 행사가 있는 시즌으로 현지 분위기를 느낄 수 있어요.' },
+      { name:'크리스마스 마켓', months:[12], note:'겨울 감성은 좋지만 산악 날씨와 추위, 교통 변수를 고려해야 해요.' }
+    ],
+    caution:'물가가 높고 산악 날씨 변수가 커서 여유일이 필요해요.',
+    bestFor:'알프스 풍경, 열차, 패러글라이딩, 자연 사진을 원하는 그룹에게 좋아요.',
+    itinerary:'5박 이상일 때 만족도가 높고, 날씨 예비일을 넣는 구성이 좋아요.'
+  },
+  {
+    id:'hawaii', name:'하와이, 미국', country:'미국', countryCode:'US', currency:'USD', region:'미주',
+    tags:['휴양','물놀이','쇼핑','사진명소'], budget:'플렉스', pace:'널널하게', idealNights:[5,6,7], flightHours:'장거리 약 8~9시간',
+    bestMonths:[4,5,6,9,10], okayMonths:[1,2,3,7,8,11,12], rainyMonths:[11,12,1,2], typhoonMonths:[], hotMonths:[7,8,9], coldMonths:[],
+    events:[
+      { name:'알로하 페스티벌', months:[9], note:'하와이 문화 행사와 퍼레이드를 즐길 수 있는 시즌이에요.' },
+      { name:'호놀룰루 마라톤', months:[12], note:'대형 행사로 숙소와 교통 혼잡을 고려해야 해요.' }
+    ],
+    caution:'비용이 높은 편이고 렌터카/팁/리조트피 등을 예산에 반영해야 해요.',
+    bestFor:'바다, 쇼핑, 리조트 휴양, 자연 사진을 모두 원하는 그룹에게 좋아요.',
+    itinerary:'5박 7일 정도가 안정적이며, 오아후 중심이면 이동 피로를 줄일 수 있어요.'
+  },
+  {
+    id:'vancouver', name:'밴쿠버, 캐나다', country:'캐나다', countryCode:'CA', currency:'CAD', region:'미주',
+    tags:['사진명소','맛집탐방','휴양','액티비티'], budget:'플렉스', pace:'적당히', idealNights:[5,6,7], flightHours:'장거리 약 10시간 이상',
+    bestMonths:[5,6,7,8,9], okayMonths:[4,10], rainyMonths:[11,12,1,2,3], typhoonMonths:[], hotMonths:[7,8], coldMonths:[1,2],
+    events:[
+      { name:'Celebration of Light', months:[7,8], note:'여름 불꽃 축제로 야경과 해변 분위기가 좋아요.' },
+      { name:'밴쿠버 재즈 페스티벌', months:[6,7], note:'음악과 도시 분위기를 즐기기 좋은 시즌이에요.' }
+    ],
+    caution:'겨울은 비가 많아 야외 일정 만족도가 떨어질 수 있어요.',
+    bestFor:'자연과 도시, 카페, 해산물, 여유로운 산책을 좋아하는 그룹에게 좋아요.',
+    itinerary:'5박 이상이면 밴쿠버 도심과 빅토리아/휘슬러 선택 일정이 가능해요.'
+  },
+  {
+    id:'cancun', name:'칸쿤, 멕시코', country:'멕시코', countryCode:'MX', currency:'MXN', region:'미주',
+    tags:['휴양','물놀이','액티비티','사진명소'], budget:'플렉스', pace:'널널하게', idealNights:[5,6,7], flightHours:'장거리 약 18시간 이상',
+    bestMonths:[12,1,2,3,4], okayMonths:[5,11], rainyMonths:[6,7,8,9,10], typhoonMonths:[8,9,10], hotMonths:[6,7,8], coldMonths:[],
+    events:[
+      { name:'죽은 자의 날', months:[11], note:'멕시코 전역의 상징적 문화 시즌으로 현지 분위기가 특별해요.' },
+      { name:'봄방학 시즌', months:[3], note:'해변 리조트가 붐빌 수 있어 분위기와 혼잡도를 고려해야 해요.' }
+    ],
+    caution:'허리케인 시즌에는 해양 액티비티와 항공 변수가 있어요. 장거리라 일정이 짧으면 피로도가 큽니다.',
+    bestFor:'올인클루시브 리조트, 카리브해, 세노테 투어를 원하는 그룹에게 좋아요.',
+    itinerary:'5박 이상일 때 이동 피로 대비 만족도가 높아요.'
+  },
+  {
+    id:'dubai', name:'두바이, UAE', country:'아랍에미리트', countryCode:'AE', currency:'AED', region:'중동·인도양',
+    tags:['쇼핑','사진명소','액티비티','맛집탐방'], budget:'플렉스', pace:'적당히', idealNights:[3,4,5], flightHours:'약 9~10시간',
+    bestMonths:[11,12,1,2,3], okayMonths:[4,10], rainyMonths:[], typhoonMonths:[], hotMonths:[5,6,7,8,9], coldMonths:[],
+    events:[
+      { name:'두바이 쇼핑 페스티벌', months:[12,1], note:'쇼핑과 도시 이벤트가 많아지는 시즌이에요.' },
+      { name:'두바이 푸드 페스티벌', months:[4,5], note:'미식 일정에 관심이 있으면 매력적이에요.' }
+    ],
+    caution:'여름은 폭염이 강해 실내 위주가 아니면 피로도가 큽니다.',
+    bestFor:'쇼핑, 호텔, 사막투어, 화려한 도시 사진을 원하는 그룹에게 좋아요.',
+    itinerary:'4박 5일이면 사막투어, 쇼핑몰, 전망대, 마리나 일정을 넣기 좋아요.'
+  },
+  {
+    id:'istanbul', name:'이스탄불, 튀르키예', country:'튀르키예', countryCode:'TR', currency:'TRY', region:'중동·유럽',
+    tags:['유적','맛집탐방','사진명소','쇼핑'], budget:'적당히', pace:'적당히', idealNights:[4,5,6], flightHours:'장거리 약 11시간 이상',
+    bestMonths:[4,5,6,9,10], okayMonths:[3,7,11], rainyMonths:[12,1,2], typhoonMonths:[], hotMonths:[7,8], coldMonths:[1,2],
+    events:[
+      { name:'이스탄불 뮤직 페스티벌', months:[6], note:'공연과 도시 분위기를 함께 즐길 수 있는 시즌이에요.' },
+      { name:'라마단/바이람 시즌', months:[3,4,5], note:'해마다 날짜가 달라지며, 운영시간과 현지 분위기가 달라질 수 있어요.' }
+    ],
+    caution:'종교 행사 기간에는 운영시간 변동이 있을 수 있어요. 언덕과 도보 이동이 많은 편입니다.',
+    bestFor:'유럽과 아시아가 섞인 도시 분위기, 바자르, 유적, 미식을 좋아하는 그룹에게 좋아요.',
+    itinerary:'4박 5일이면 구시가지, 보스포루스, 바자르, 신시가지를 나눠 보기 좋아요.'
+  },
+  {
+    id:'maldives', name:'몰디브', country:'몰디브', countryCode:'MV', currency:'MVR', region:'중동·인도양',
+    tags:['휴양','물놀이','사진명소'], budget:'플렉스', pace:'널널하게', idealNights:[4,5,6], flightHours:'장거리 약 10시간 이상',
+    bestMonths:[12,1,2,3,4], okayMonths:[5,11], rainyMonths:[5,6,7,8,9,10], typhoonMonths:[], hotMonths:[], coldMonths:[],
+    events:[
+      { name:'이드 명절 시즌', months:[3,4,5,6], note:'날짜가 매년 바뀌며 일부 현지 섬 운영에 변동이 있을 수 있어요.' }
+    ],
+    caution:'우기에는 스콜과 파도 영향이 있고, 리조트 비용 편차가 커요.',
+    bestFor:'완전한 휴양, 수중환경, 리조트 중심 여행을 원하는 그룹에게 좋아요.',
+    itinerary:'4박 5일이면 한 리조트에 머물며 쉬는 일정이 가장 안정적이에요.'
+  },
+  {
+    id:'queenstown', name:'퀸스타운, 뉴질랜드', country:'뉴질랜드', countryCode:'NZ', currency:'NZD', region:'오세아니아',
+    tags:['액티비티','사진명소','휴양'], budget:'플렉스', pace:'적당히', idealNights:[5,6,7], flightHours:'장거리 약 12시간 이상',
+    bestMonths:[12,1,2,3,4], okayMonths:[9,10,11,6,7,8], rainyMonths:[5,6,7], typhoonMonths:[], hotMonths:[1,2], coldMonths:[6,7,8],
+    events:[
+      { name:'퀸스타운 겨울 축제', months:[6], note:'스키와 겨울 액티비티 분위기가 강해져요. 남반구라 한국과 계절이 반대예요.' }
+    ],
+    caution:'자연·액티비티 중심이라 날씨 변수와 이동거리를 여유 있게 잡아야 해요.',
+    bestFor:'대자연, 액티비티, 호수 풍경, 로드트립 감성을 원하는 그룹에게 좋아요.',
+    itinerary:'5박 이상이어야 장거리 이동 대비 만족도가 높아요.'
   }
+
 ];
 
 function defaultStyles(){
@@ -1018,7 +1168,6 @@ async function createNewTrip(){
     showStatus('여행 코드가 만들어졌어요. 친구에게 이 코드를 알려주세요: ' + currentCode, true);
     hydratePlanFromState();
     setupCalendarSelects();
-    setupCountrySelect();
     renderCalendar();
     goToScreen('plan');
   }catch(err){
@@ -1045,7 +1194,6 @@ async function joinTrip(code){
     document.getElementById('footCode').textContent = currentCode;
     hydratePlanFromState();
     setupCalendarSelects();
-    setupCountrySelect();
     renderCalendar();
     renderProfileScreen();
     showStatus('여행 코드 ' + currentCode + ' 를 불러왔어요.', true);
@@ -1061,30 +1209,6 @@ function hydratePlanFromState(){
   document.getElementById('groupCount').textContent = state?.meta?.groupSize || 2;
   planTemp.start = state?.meta?.startDate || null;
   planTemp.end = state?.meta?.endDate || null;
-}
-
-function setupCountrySelect(){
-  const sel = document.getElementById('countrySelect');
-  sel.innerHTML = COUNTRY_OPTIONS.map(c => '<option value="' + c.code + '">' + escapeHtml(c.label) + '</option>').join('');
-  const metaCode = state?.meta?.countryCode || 'KR';
-  sel.value = COUNTRY_OPTIONS.some(c => c.code === metaCode) ? metaCode : 'KR';
-  updateCountryHelp();
-  sel.onchange = () => {
-    const picked = COUNTRY_OPTIONS.find(c => c.code === sel.value) || COUNTRY_OPTIONS[0];
-    if(state){
-      state.meta.countryCode = picked.code;
-      state.meta.countryName = picked.name;
-      state.meta.currency = picked.currency;
-      state.meta.exchangeBase = 'KRW';
-      state.meta.exchangeTarget = picked.currency === 'KRW' ? 'USD' : picked.currency;
-      saveTrip();
-    }
-    updateCountryHelp();
-  };
-}
-function updateCountryHelp(){
-  const picked = COUNTRY_OPTIONS.find(c => c.code === document.getElementById('countrySelect').value) || COUNTRY_OPTIONS[0];
-  document.getElementById('countryHelp').textContent = picked.name + ' 여행 기준으로 체크리스트에서 ' + picked.currency + ' 환율 계산을 보여줘요.';
 }
 
 function setupCalendarSelects(){
@@ -1348,11 +1472,10 @@ function renderSummaryBar(){
   ).join('');
   let dateText = '날짜 미정';
   if(state.meta.startDate && state.meta.endDate) dateText = fmtDate(state.meta.startDate) + ' - ' + fmtDate(state.meta.endDate);
-  const countryText = (state.meta.countryName || '한국') + ' · ' + (state.meta.currency || 'KRW');
   bar.innerHTML =
     '<div class="summary-left">' +
       '<div class="summary-avatars">' + avatars + '</div>' +
-      '<span class="summary-meta">' + state.meta.groupSize + '명 · ' + dateText + ' · ' + escapeHtml(countryText) + '</span>' +
+      '<span class="summary-meta">' + state.meta.groupSize + '명 · ' + dateText + '</span>' +
     '</div>' +
     '<div class="row" style="gap:8px;">' +
       '<button class="btn small" id="editPlanBtn">인원/일정 수정</button>' +
@@ -1360,7 +1483,7 @@ function renderSummaryBar(){
       '<button class="btn small" id="switchProfileBtn">프로필 변경</button>' +
       '<button class="btn small primary" id="viewResultBtn">여행 성향 보기</button>' +
     '</div>';
-  document.getElementById('editPlanBtn').onclick = () => { hydratePlanFromState(); setupCountrySelect(); renderCalendar(); goToScreen('plan'); };
+  document.getElementById('editPlanBtn').onclick = () => { hydratePlanFromState(); renderCalendar(); goToScreen('plan'); };
   document.getElementById('editStyleBtn').onclick = () => { renderStyleScreen(); goToScreen('style'); };
   document.getElementById('switchProfileBtn').onclick = () => { renderProfileScreen(); goToScreen('profile'); };
   document.getElementById('viewResultBtn').onclick = () => { renderResult(); goToScreen('result'); };
@@ -1372,13 +1495,21 @@ function exchangeCurrencies(){
     { code:'USD', label:'미국 달러' },
     { code:'JPY', label:'일본 엔' },
     { code:'EUR', label:'유로' },
+    { code:'GBP', label:'영국 파운드' },
+    { code:'CAD', label:'캐나다 달러' },
+    { code:'AUD', label:'호주 달러' },
+    { code:'NZD', label:'뉴질랜드 달러' },
+    { code:'CHF', label:'스위스 프랑' },
+    { code:'AED', label:'아랍에미리트 디르함' },
+    { code:'TRY', label:'튀르키예 리라' },
+    { code:'MXN', label:'멕시코 페소' },
+    { code:'MVR', label:'몰디브 루피야' },
     { code:'VND', label:'베트남 동' },
     { code:'THB', label:'태국 바트' },
     { code:'PHP', label:'필리핀 페소' },
     { code:'IDR', label:'인도네시아 루피아' },
     { code:'SGD', label:'싱가포르 달러' },
-    { code:'HKD', label:'홍콩 달러' },
-    { code:'AUD', label:'호주 달러' }
+    { code:'HKD', label:'홍콩 달러' }
   ];
 }
 function currencyName(code){
@@ -1411,8 +1542,15 @@ function formatMoney(amount, currency){
   }).format(isFinite(amount) ? amount : 0) + ' ' + currency;
 }
 function formatRate(rate, currency){
-  const decimals = ['VND','IDR','KRW','JPY'].includes(currency) ? 0 : 5;
-  return new Intl.NumberFormat('ko-KR', { maximumFractionDigits: decimals, minimumFractionDigits: 0 }).format(isFinite(rate) ? rate : 0);
+  if(!isFinite(rate)) return '0';
+  const abs = Math.abs(rate);
+  let maxDigits = 2;
+  if(abs === 0) maxDigits = 0;
+  else if(abs < 0.0001) maxDigits = 8;
+  else if(abs < 1) maxDigits = 6;
+  else if(abs < 100) maxDigits = 4;
+  else maxDigits = 2;
+  return new Intl.NumberFormat('ko-KR', { maximumFractionDigits:maxDigits, minimumFractionDigits:0 }).format(rate);
 }
 function defaultTargetCurrency(){
   const c = state?.meta?.currency || 'USD';
@@ -1430,11 +1568,11 @@ function renderExchangeCard(){
       '<button class="btn small" id="refreshExchangeBtn">새로고침</button>' +
     '</div>' +
     '<div class="exchange-converter">' +
-      '<div class="exchange-row"><input type="number" id="exchangeBaseAmount" min="0" step="any" value="' + baseAmount + '" /><select id="exchangeBaseSelect">' + currencySelectOptions(baseCurrency) + '</select></div>' +
-      '<div class="exchange-row"><input type="number" id="exchangeTargetAmount" min="0" step="any" value="" /><select id="exchangeTargetSelect">' + currencySelectOptions(targetCurrency) + '</select></div>' +
+      '<div class="exchange-row"><input type="text" inputmode="decimal" id="exchangeBaseAmount" value="' + baseAmount + '" /><select id="exchangeBaseSelect">' + currencySelectOptions(baseCurrency) + '</select></div>' +
+      '<div class="exchange-row"><input type="text" inputmode="decimal" id="exchangeTargetAmount" value="" /><select id="exchangeTargetSelect">' + currencySelectOptions(targetCurrency) + '</select></div>' +
     '</div>' +
     '<div class="exchange-tools">' +
-      '<div class="exchange-box"><label>총 여행 예산 KRW</label><input type="number" id="budgetAmount" value="' + (state.meta.budgetKRW || '') + '" min="0" placeholder="예: 1200000" /><p class="exchange-out" id="budgetOutText">예산을 입력하면 1인 예산도 계산돼요.</p></div>' +
+      '<div class="exchange-box"><label>총 여행 예산 KRW</label><input type="text" inputmode="numeric" id="budgetAmount" value="' + (state.meta.budgetKRW || '') + '" placeholder="예: 1200000" /><p class="exchange-out" id="budgetOutText">예산을 입력하면 1인 예산도 계산돼요.</p></div>' +
     '</div>' +
     '<p class="exchange-note" id="exchangeNote">실시간 환율 API 기준 간단 계산입니다.</p>';
   document.getElementById('refreshExchangeBtn').onclick = () => { exchangeCache = null; renderExchangeCard(); };
@@ -1451,10 +1589,17 @@ function attachExchangeCalculatorShell(){
   const note = document.getElementById('exchangeNote');
   if(!baseInput || !targetInput || !baseSelect || !targetSelect || !budgetInput) return;
 
+  function parseAmount(value){
+    if(typeof value !== 'string') return Number(value) || 0;
+    const cleaned = value.replace(/,/g, '').trim();
+    const n = parseFloat(cleaned);
+    return isFinite(n) ? n : 0;
+  }
+
   function persistExchangeState(){
     state.meta.exchangeBase = baseSelect.value;
     state.meta.exchangeTarget = targetSelect.value;
-    state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 0;
+    state.meta.exchangeBaseAmount = parseAmount(baseInput.value);
     saveTrip();
   }
 
@@ -1468,15 +1613,15 @@ function attachExchangeCalculatorShell(){
     try{
       const info = await getExchangeRate(base, target);
       const rate = info.rate;
-      mainRate.innerHTML = '1 <span class="unit">' + escapeHtml(currencyName(base)) + ' =</span><br>' + formatRate(rate, target) + ' <span class="unit">' + escapeHtml(currencyName(target)) + '</span>';
+      mainRate.innerHTML = '1 <span class="unit">' + escapeHtml(currencyName(base)) + ' =</span> ' + formatRate(rate, target) + ' <span class="unit">' + escapeHtml(currencyName(target)) + '</span>';
       note.textContent = '업데이트: ' + info.updatedAt.toLocaleString('ko-KR') + ' · 실제 적용 환율/수수료는 다를 수 있어요.';
       function updateFromBase(){
-        const v = parseFloat(baseInput.value || '0');
+        const v = parseAmount(baseInput.value);
         targetInput.value = isFinite(v) ? trimNumber(v * rate, target) : '';
         updateBudget(rate, target);
       }
       function updateFromTarget(){
-        const v = parseFloat(targetInput.value || '0');
+        const v = parseAmount(targetInput.value);
         baseInput.value = isFinite(v) ? trimNumber(v / rate, base) : '';
         updateBudget(rate, target);
       }
@@ -1500,14 +1645,19 @@ function attachExchangeCalculatorShell(){
 function trimNumber(value, currency){
   const zeroDecimal = ['KRW','JPY','VND','IDR'];
   if(!isFinite(value)) return '';
-  if(zeroDecimal.includes(currency)) return String(Math.round(value));
+  const abs = Math.abs(value);
+  if(zeroDecimal.includes(currency)){
+    if(abs > 0 && abs < 1) return String(Math.round(value * 10000) / 10000);
+    return String(Math.round(value));
+  }
+  if(abs > 0 && abs < 1) return String(Math.round(value * 10000) / 10000);
   return String(Math.round(value * 100) / 100);
 }
 function updateBudget(rate, targetCurrency, shouldSave=false){
   const budgetInput = document.getElementById('budgetAmount');
   const out = document.getElementById('budgetOutText');
   if(!budgetInput || !out) return;
-  const budget = parseFloat(budgetInput.value || '0');
+  const budget = parseFloat(String(budgetInput.value || '0').replace(/,/g,''));
   const group = state.meta.groupSize || 1;
   if(!budget){
     out.textContent = '예산을 입력하면 1인 예산도 계산돼요.';
@@ -1716,7 +1866,6 @@ function scoreDestination(dest, agg, info){
   score += climate.score;
   const event = analyzeEvents(dest, info.month);
   score += event.score;
-  if(dest.countryCode === state.meta.countryCode) score += 4;
 
   if(agg.flightTime === '짧게'){
     if(dest.flightHours.includes('장거리') || dest.flightHours.includes('7시간')){ score -= 10; reasons.push('비행시간 짧게를 선호하는 그룹에게는 항공 피로도가 클 수 있어요.'); }
@@ -1753,6 +1902,43 @@ function scoreDestination(dest, agg, info){
     matches
   };
 }
+function destinationRegion(dest){
+  if(dest.region) return dest.region;
+  const europe = ['FR','GB','ES','IT','CZ','AT','NL','DE','CH'];
+  const americas = ['US','CA','MX'];
+  const oceania = ['AU','NZ'];
+  const middle = ['AE','TR','MV'];
+  if(europe.includes(dest.countryCode)) return '유럽';
+  if(americas.includes(dest.countryCode)) return '미주';
+  if(oceania.includes(dest.countryCode)) return '오세아니아';
+  if(middle.includes(dest.countryCode)) return '중동·인도양';
+  return '아시아';
+}
+function pickRecommendationSet(scoredAll){
+  const used = new Set();
+  const usedRegions = new Set();
+  function take(predicate, label){
+    const found = scoredAll.find(item => !used.has(item.dest.id) && predicate(item));
+    if(found){
+      used.add(found.dest.id);
+      usedRegions.add(destinationRegion(found.dest));
+      found.bucketLabel = label;
+      return found;
+    }
+    return null;
+  }
+  const result = [];
+  const realistic = take(item => true, '현실적인 추천');
+  if(realistic) result.push(realistic);
+  const challenge = take(item => destinationRegion(item.dest) !== destinationRegion(realistic?.dest || {}) && (item.dest.budget === '플렉스' || item.dest.flightHours.includes('장거리') || Math.max(...item.dest.idealNights) >= 5), '조금 무리하면 좋은 추천') ||
+                    take(item => !usedRegions.has(destinationRegion(item.dest)), '조금 무리하면 좋은 추천');
+  if(challenge) result.push(challenge);
+  const seasonalSorted = scoredAll.slice().sort((a,b) => (b.climate.score + b.event.score + b.duration.score) - (a.climate.score + a.event.score + a.duration.score));
+  const seasonal = seasonalSorted.find(item => !used.has(item.dest.id) && !usedRegions.has(destinationRegion(item.dest))) || seasonalSorted.find(item => !used.has(item.dest.id));
+  if(seasonal){ seasonal.bucketLabel = '계절·축제 추천'; result.push(seasonal); used.add(seasonal.dest.id); }
+  scoredAll.forEach(item => { if(result.length < 3 && !used.has(item.dest.id)){ item.bucketLabel = '추가 추천'; result.push(item); used.add(item.dest.id); } });
+  return result.slice(0,3);
+}
 function renderResult(){
   const body = document.getElementById('resultBody');
   const agg = computeAggregate();
@@ -1765,7 +1951,7 @@ function renderResult(){
   const tourText = agg.tourStyle ? labelOf(TOUR_STYLE_OPTIONS, agg.tourStyle) : '자유롭게 움직이는';
   const budgetText = agg.budgetLabel === '가성비' ? '가성비를 중시하는' : agg.budgetLabel === '플렉스' ? '경험에 아끼지 않는' : '예산 균형을 원하는';
   let summary = '우리 팀은 ' + activityText + ' 여행을 선호하고, ' + tourText + ' 방식을 좋아해요. 일정은 ' + agg.paceLabel + ' 짜는 편이고, ' + budgetText + ' 스타일이에요.';
-  const tags = ['참여 ' + agg.participants.length + '명 기준', info.text, info.season + ' 출발', (state.meta.countryName || '국가 미정') + ' · ' + (state.meta.currency || 'KRW')];
+  const tags = ['참여 ' + agg.participants.length + '명 기준', info.text, info.season + ' 출발'];
   if(agg.spicy) tags.push('매운맛: ' + labelOf(SPICY_OPTIONS, agg.spicy));
   if(agg.waitTime) tags.push('웨이팅: ' + labelOf(WAIT_TIME_OPTIONS, agg.waitTime));
   if(agg.transport) tags.push(labelOf(TRANSPORT_OPTIONS, agg.transport));
@@ -1779,19 +1965,19 @@ function renderResult(){
   if(agg.topContentFocus.length) tags.push('콘텐츠: ' + agg.topContentFocus.map(v => labelOf(CONTENT_FOCUS_OPTIONS, v)).join(', '));
   const dislikeKeys = Object.keys(agg.dislikeSet);
   if(dislikeKeys.length) tags.push('기피 재료: ' + dislikeKeys.map(k => labelOf(DISLIKE_OPTIONS,k)).join(', '));
-  const scored = DESTINATIONS.map(d => scoreDestination(d, agg, info)).sort((a,b) => b.score - a.score).slice(0,3);
+  const scoredAll = DESTINATIONS.map(d => scoreDestination(d, agg, info)).sort((a,b) => b.score - a.score);
+  const picked = pickRecommendationSet(scoredAll);
   body.innerHTML =
     '<div class="result-summary"><p>' + escapeHtml(summary) + '</p><div class="result-stats">' + tags.map(t => '<span class="result-tag">' + escapeHtml(t) + '</span>').join('') + '</div></div>' +
-    '<div class="rec-board"><div class="rec-section-title"><h3>추천 여행지 TOP 3</h3><p>취향 + 일정 길이 + 실제 시즌성 + 현지 행사 기준<br>축제 날짜는 매년 변동될 수 있어요.</p></div>' +
-    scored.map((item, idx) => renderRecommendationCard(item, idx + 1, info, agg)).join('') +
+    '<div class="rec-board"><div class="rec-section-title"><h3>추천 여행지</h3><p>현실형 · 도전형 · 시즌형으로 나눠서 보여줘요.<br>같은 권역만 반복되지 않도록 보정했어요.</p></div>' +
+    picked.map((item, idx) => renderRecommendationCard(item, idx + 1, info, agg, item.bucketLabel)).join('') +
     '<p class="rec-disclaimer">※ 날씨/축제 분석은 도시별 대표적인 기후 패턴과 알려진 주요 행사 시즌을 기준으로 한 사전 체크용 정보입니다. 실제 출발 전에는 항공권, 숙소 가격, 공식 행사 일정, 기상 예보를 다시 확인해주세요.</p></div>';
 }
-function renderRecommendationCard(item, rank, info, agg){
+function renderRecommendationCard(item, rank, info, agg, bucketLabel){
   const d = item.dest;
   const cardClass = rank === 1 ? 'rec-card top' : 'rec-card';
   const durationType = item.duration.percent >= 90 ? 'good' : item.duration.percent >= 70 ? 'warn' : 'risk';
   const eventType = item.event.score > 0 ? 'warn' : 'good';
-  const countryMatch = d.countryCode === state.meta.countryCode;
   const conditionLines = [];
   if(agg.flightType) conditionLines.push('항공편: ' + labelOf(FLIGHT_TYPE_OPTIONS, agg.flightType));
   if(agg.flightTime) conditionLines.push('비행시간: ' + labelOf(FLIGHT_TIME_OPTIONS, agg.flightTime));
@@ -1806,10 +1992,9 @@ function renderRecommendationCard(item, rank, info, agg){
     '<span class="rec-tag ' + item.climate.badgeType + '">' + escapeHtml(item.climate.badge) + '</span>',
     '<span class="rec-tag ' + eventType + '">' + escapeHtml(item.event.badge) + '</span>'
   ];
-  if(countryMatch) tags.unshift('<span class="rec-tag good">선택 국가와 일치</span>');
   return '<div class="' + cardClass + '">' +
     '<div class="rec-head">' +
-      '<div class="rec-kicker"><span class="rank-badge">TOP ' + rank + '</span><span class="score-pill">추천도 ' + item.score + '%</span></div>' +
+      '<div class="rec-kicker"><span class="rank-badge">' + escapeHtml(bucketLabel || ('TOP ' + rank)) + '</span><span class="score-pill">추천도 ' + item.score + '%</span></div>' +
       '<h3 class="rec-name">' + escapeHtml(d.name) + '</h3>' +
       '<p class="rec-sub">' + escapeHtml(d.country) + ' · ' + escapeHtml(d.currency) + ' · ' + escapeHtml(d.flightHours) + ' · 추천 일정 ' + d.idealNights.map(n => n + '박').join('/') + '</p>' +
       '<div class="rec-tags">' + tags.join('') + '</div>' +
@@ -1838,13 +2023,9 @@ document.getElementById('codeInput').onkeydown = e => { if(e.key === 'Enter') do
 document.getElementById('backToCodeFromPlan').onclick = () => goToScreen('code');
 document.getElementById('toProfileBtn').onclick = () => {
   if(!state) return;
-  const picked = COUNTRY_OPTIONS.find(c => c.code === document.getElementById('countrySelect').value) || COUNTRY_OPTIONS[0];
   state.meta.groupSize = parseInt(document.getElementById('groupCount').textContent,10);
   state.meta.startDate = planTemp.start;
   state.meta.endDate = planTemp.end;
-  state.meta.countryCode = picked.code;
-  state.meta.countryName = picked.name;
-  state.meta.currency = picked.currency;
   saveTrip();
   renderProfileScreen();
   goToScreen('profile');
@@ -1924,7 +2105,6 @@ document.getElementById('backToChecklistFromResult').onclick = () => {
 };
 
 setupCalendarSelects();
-setupCountrySelect();
 renderCalendar();
 goToScreen('code');
 </script>
