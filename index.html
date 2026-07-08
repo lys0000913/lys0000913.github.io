@@ -232,29 +232,29 @@ input[type=range]{width:100%;accent-color:var(--teal-dim);height:4px;margin:4px 
   background:#fff;
   color:var(--ink);
   border:1px solid var(--paper-dim);
-  border-radius:10px;
-  padding:20px;
-  margin-bottom:16px;
-  box-shadow:0 10px 22px rgba(17,23,42,.10);
+  border-radius:8px;
+  padding:14px 16px;
+  margin-bottom:12px;
+  box-shadow:0 6px 14px rgba(17,23,42,.07);
 }
-.exchange-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
-.exchange-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-dim);margin:0 0 6px;}
-.exchange-title{font-size:16px;font-weight:700;margin:0;color:var(--ink);}
-.exchange-main-rate{font-size:30px;line-height:1.15;font-weight:700;color:var(--ink);margin:8px 0 4px;letter-spacing:-.03em;}
-.exchange-main-rate .unit{font-size:14px;font-weight:600;color:var(--ink-soft);letter-spacing:0;}
-.exchange-rate-line{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:6px 0 0;}
-.exchange-updated{font-size:11px;color:var(--ink-soft);white-space:nowrap;}
-.exchange-converter{display:grid;grid-template-columns:1fr;gap:9px;margin-top:16px;}
-.exchange-row{display:grid;grid-template-columns:1fr 190px;align-items:center;border:1px solid var(--paper-dim);border-radius:7px;background:#fff;overflow:hidden;}
-.exchange-row input{border:none;border-radius:0;padding:14px 16px;font-size:16px;width:100%;}
-.exchange-row select{height:100%;border:none;border-left:1px solid var(--paper-dim);border-radius:0;background:#fff;padding:0 14px;font-size:13px;color:var(--ink);}
-.exchange-tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;}
-.exchange-box{background:#fffaf0;border:1px solid rgba(184,127,19,.22);border-radius:7px;padding:12px;}
-.exchange-box label{display:block;font-size:12px;font-weight:600;margin-bottom:6px;color:var(--ink);}
-.exchange-box input{width:100%;}
-.exchange-out{font-family:'Space Mono',monospace;font-size:13px;color:var(--teal-dim);margin:8px 0 0;word-break:break-word;}
-.exchange-note{font-size:11px;color:var(--ink-soft);line-height:1.55;margin:12px 0 0;}
-.exchange-error{font-size:13px;color:var(--coral-dim);line-height:1.6;margin:0;}
+.exchange-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.exchange-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-dim);margin:0 0 4px;}
+.exchange-title{font-size:15px;font-weight:700;margin:0;color:var(--ink);}
+.exchange-main-rate{font-size:24px;line-height:1.12;font-weight:700;color:var(--ink);margin:5px 0 2px;letter-spacing:-.03em;}
+.exchange-main-rate .unit{font-size:12px;font-weight:600;color:var(--ink-soft);letter-spacing:0;}
+.exchange-rate-line{font-size:12px;color:var(--ink-soft);line-height:1.45;margin:4px 0 0;}
+.exchange-updated{font-size:10px;color:var(--ink-soft);white-space:nowrap;}
+.exchange-converter{display:grid;grid-template-columns:1fr;gap:7px;margin-top:10px;}
+.exchange-row{display:grid;grid-template-columns:1fr 170px;align-items:center;border:1px solid var(--paper-dim);border-radius:6px;background:#fff;overflow:hidden;}
+.exchange-row input{border:none;border-radius:0;padding:10px 12px;font-size:14px;width:100%;}
+.exchange-row select{height:100%;border:none;border-left:1px solid var(--paper-dim);border-radius:0;background:#fff;padding:0 12px;font-size:12px;color:var(--ink);}
+.exchange-tools{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+.exchange-box{background:#fffaf0;border:1px solid rgba(184,127,19,.22);border-radius:6px;padding:10px;}
+.exchange-box label{display:block;font-size:11px;font-weight:600;margin-bottom:5px;color:var(--ink);}
+.exchange-box input{width:100%;padding:9px 10px;font-size:13px;}
+.exchange-out{font-family:'Space Mono',monospace;font-size:12px;color:var(--teal-dim);margin:7px 0 0;word-break:break-word;}
+.exchange-note{font-size:10px;color:var(--ink-soft);line-height:1.45;margin:8px 0 0;}
+.exchange-error{font-size:12px;color:var(--coral-dim);line-height:1.5;margin:0;}
 
 .stub{display:flex;align-items:center;justify-content:space-between;background:var(--paper);color:var(--ink);border-radius:6px;padding:18px 22px;margin-bottom:16px;position:relative;overflow:hidden;}
 .stub:before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:repeating-linear-gradient(180deg, var(--coral) 0 8px, transparent 8px 16px);}
@@ -952,7 +952,9 @@ function listenTrip(code){
     if(screen === 'profile') renderProfileScreen();
     if(screen === 'checklist'){
       renderSummaryBar();
-      renderExchangeCard();
+      const exchangeCard = document.getElementById('exchangeCard');
+      const exchangeActive = exchangeCard && exchangeCard.contains(document.activeElement);
+      if(!exchangeActive) renderExchangeCard();
       renderChecklist();
     }
     if(screen === 'result') renderResult();
@@ -1421,7 +1423,7 @@ function renderExchangeCard(){
   if(!state){ card.innerHTML = ''; return; }
   const baseCurrency = state.meta.exchangeBase || 'KRW';
   const targetCurrency = state.meta.exchangeTarget || defaultTargetCurrency();
-  const baseAmount = state.meta.exchangeBaseAmount || 1;
+  const baseAmount = state.meta.exchangeBaseAmount ?? 1;
   card.innerHTML =
     '<div class="exchange-top">' +
       '<div><p class="exchange-label">Exchange rate</p><p class="exchange-title">환율 계산</p><p class="exchange-main-rate" id="exchangeMainRate">불러오는 중...</p><p class="exchange-rate-line" id="exchangeRateLine">화폐를 선택해서 바로 계산할 수 있어요.</p></div>' +
@@ -1433,9 +1435,8 @@ function renderExchangeCard(){
     '</div>' +
     '<div class="exchange-tools">' +
       '<div class="exchange-box"><label>총 여행 예산 KRW</label><input type="number" id="budgetAmount" value="' + (state.meta.budgetKRW || '') + '" min="0" placeholder="예: 1200000" /><p class="exchange-out" id="budgetOutText">예산을 입력하면 1인 예산도 계산돼요.</p></div>' +
-      '<div class="exchange-box"><label>환율 메모</label><p class="exchange-rate-line">환전, 카드 결제, 트래블카드 충전 시 실제 적용 환율과 수수료는 달라질 수 있어요.</p></div>' +
     '</div>' +
-    '<p class="exchange-note" id="exchangeNote">실시간 환율 API를 기준으로 간단 계산합니다.</p>';
+    '<p class="exchange-note" id="exchangeNote">실시간 환율 API 기준 간단 계산입니다.</p>';
   document.getElementById('refreshExchangeBtn').onclick = () => { exchangeCache = null; renderExchangeCard(); };
   attachExchangeCalculatorShell();
 }
@@ -1449,22 +1450,26 @@ function attachExchangeCalculatorShell(){
   const mainRate = document.getElementById('exchangeMainRate');
   const note = document.getElementById('exchangeNote');
   if(!baseInput || !targetInput || !baseSelect || !targetSelect || !budgetInput) return;
-  let lastEdited = 'base';
+
+  function persistExchangeState(){
+    state.meta.exchangeBase = baseSelect.value;
+    state.meta.exchangeTarget = targetSelect.value;
+    state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 0;
+    saveTrip();
+  }
 
   async function refreshRate(){
     const base = baseSelect.value;
     const target = targetSelect.value;
     state.meta.exchangeBase = base;
     state.meta.exchangeTarget = target;
-    state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 1;
-    saveTrip();
     mainRate.textContent = '불러오는 중...';
     rateLine.textContent = currencyName(base) + ' → ' + currencyName(target);
     try{
       const info = await getExchangeRate(base, target);
       const rate = info.rate;
       mainRate.innerHTML = '1 <span class="unit">' + escapeHtml(currencyName(base)) + ' =</span><br>' + formatRate(rate, target) + ' <span class="unit">' + escapeHtml(currencyName(target)) + '</span>';
-      note.textContent = '마지막 업데이트: ' + info.updatedAt.toLocaleString('ko-KR') + ' · 실제 환전/카드 결제 수수료는 별도입니다.';
+      note.textContent = '업데이트: ' + info.updatedAt.toLocaleString('ko-KR') + ' · 실제 적용 환율/수수료는 다를 수 있어요.';
       function updateFromBase(){
         const v = parseFloat(baseInput.value || '0');
         targetInput.value = isFinite(v) ? trimNumber(v * rate, target) : '';
@@ -1473,22 +1478,23 @@ function attachExchangeCalculatorShell(){
       function updateFromTarget(){
         const v = parseFloat(targetInput.value || '0');
         baseInput.value = isFinite(v) ? trimNumber(v / rate, base) : '';
-        state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 1;
-        saveTrip();
         updateBudget(rate, target);
       }
-      baseInput.oninput = () => { lastEdited = 'base'; state.meta.exchangeBaseAmount = parseFloat(baseInput.value || '0') || 1; updateFromBase(); saveTrip(); };
-      targetInput.oninput = () => { lastEdited = 'target'; updateFromTarget(); };
-      budgetInput.oninput = () => updateBudget(rate, target, true);
-      if(lastEdited === 'target') updateFromTarget(); else updateFromBase();
+      baseInput.oninput = updateFromBase;
+      targetInput.oninput = updateFromTarget;
+      baseInput.onblur = persistExchangeState;
+      targetInput.onblur = persistExchangeState;
+      budgetInput.oninput = () => updateBudget(rate, target, false);
+      budgetInput.onblur = () => updateBudget(rate, target, true);
+      updateFromBase();
     }catch(err){
       console.error(err);
       mainRate.textContent = '환율을 불러오지 못했어요.';
       rateLine.textContent = '인터넷 연결 또는 환율 API 응답을 확인해주세요.';
     }
   }
-  baseSelect.onchange = refreshRate;
-  targetSelect.onchange = refreshRate;
+  baseSelect.onchange = () => { persistExchangeState(); refreshRate(); };
+  targetSelect.onchange = () => { persistExchangeState(); refreshRate(); };
   refreshRate();
 }
 function trimNumber(value, currency){
